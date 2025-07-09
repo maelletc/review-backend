@@ -1,0 +1,42 @@
+<configuration>
+
+    <springProfile name="local">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <springProfile name="!local">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <timestamp/>
+                    <loggerName/>
+                    <logLevel/>
+                    <threadName/>
+                    <mdc/>
+                    <pattern>
+                        <pattern>
+                            {
+                            "log": "#tryJson{%message}",
+                            "labels": {
+                            "shipping_team": "@project.groupId@",
+                            "appVersion": "@project.version@",
+                            "shipping_component": "@project.artifactId@"
+                            }
+                            }
+                        </pattern>
+                    </pattern>
+                    <stackTrace/>
+                </providers>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

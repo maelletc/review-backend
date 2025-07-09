@@ -1,0 +1,37 @@
+server:
+    servlet:
+      context-path: /api
+
+spring:
+  profiles:
+    include: common
+    active: local
+  jpa:
+    open-in-view: true
+  liquibase:
+    enabled: false
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1536MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, logfile, mappings
+      base-path: /actuator
+  # Configuration JMX pour management endpoints
+
+# Log file needed for actuator logfile endpoint
+logging.file.name: /home/LogFiles/Application/flightreview-api.log
+
+
+
+---
+spring:
+  config.activate.on-profile: local
+
+# Log file needed for actuator logfile endpoint
+logging.file.name: /tmp/flightreview-api.log
+

@@ -1,0 +1,70 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+registries:
+  maven-nexus:
+    type: maven-repository
+    url: https://nexus.devnet.klm.com/repository/public
+updates:
+  - package-ecosystem: "github-actions"
+    # Workflow files stored in the default location of `.github/workflows`. (You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # If you want the PR to target a specific branch and not the default `main` one > uncomment to activate
+    #target-branch: "develop"
+    groups:
+     # Group of actions from `afkl-airspace` organization
+     afkl-airspace-github-actions:
+        patterns:
+          - "afkl-airspace/*"
+     # Group from all other actions
+     external-github-actions:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "afkl-airspace/*"
+  - package-ecosystem: "maven"
+    directory: "."
+    registries:
+      - maven-nexus # Allow version updates for dependencies in this registry
+    schedule:
+      interval: "weekly"
+    # If you want the PR to target a specific branch and not the default `main` one > uncomment to activate
+    #target-branch: "develop"
+    # Allow up to 10 open pull requests for maven dependencies
+    open-pull-requests-limit: 10
+    # Create a group of dependencies to be updated together in one pull request
+    groups:
+     # Group of non AFKLM dependencies
+     external-minor-dev-dependencies:
+        # Define patterns to include dependencies in the group (based on dependency name)
+        # All other dependencies are gather in one PR
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "com.afklm"
+          - "com.airfrance"
+          - "com.klm"
+          - "com.afklm.*"
+          - "com.airfrance.*"
+          - "com.klm.*"
+        update-types:
+          - "minor"
+          - "patch"
+     afkl-minor-dev-dependencies:
+        # Define patterns to include dependencies in the group (based on dependency name)
+        # All AFKLM dependencies are gather in one PR 
+        patterns:
+          - "com.afklm"
+          - "com.airfrance"
+          - "com.klm"
+          - "com.afklm.*"
+          - "com.airfrance.*"
+          - "com.klm.*"
+        update-types:
+          - "minor"
+          - "patch"
