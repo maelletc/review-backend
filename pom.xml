@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.5</version>
+    <version>3.5.3</version>
   </parent>
 
   <groupId>com.afklm.flightreview</groupId>
@@ -25,9 +25,9 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <duplicate-finder-maven-plugin.version>2.0.1</duplicate-finder-maven-plugin.version>
     <exec-maven-plugin.version>3.2.0</exec-maven-plugin.version>
-    <org.springdoc.springdoc-openapi-ui.version>2.5.0</org.springdoc.springdoc-openapi-ui.version>
+    <org.springdoc.springdoc-openapi-ui.version>2.8.9</org.springdoc.springdoc-openapi-ui.version>
     <logstash-logback.version>7.4</logstash-logback.version>
-    <org.lombok.version>1.18.36</org.lombok.version>
+    <org.lombok.version>1.18.38</org.lombok.version>
 
   </properties>
 
